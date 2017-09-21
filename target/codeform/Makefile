@@ -6,13 +6,17 @@ TARGET = $(shell basename $$(pwd))
 DIR = dir
 
 .PHONY: all
-all: $(DIR)/codeform
+all: $(DIR)/codeform $(DIR)/codeform-s
 
 $(DIR):
 	@unzip -q codeform.zip -d $(DIR)
 
 $(DIR)/codeform: $(DIR)
 	@cd $(DIR) && make CFLAGS="-W -Wall -ansi -pedantic -O2 -g -Wno-unused-but-set-variable"
+
+$(DIR)/codeform-s: $(DIR)/codeform
+	@cp $(DIR)/codeform $(DIR)/codeform-s
+	strip $(DIR)/codeform-s
 
 .PHONY: clean
 clean:
