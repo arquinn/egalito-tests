@@ -12,7 +12,7 @@ $(DIR):
 	@unzip -q codeform.zip -d $(DIR)
 
 $(DIR)/codeform: $(DIR)
-	@cd $(DIR) && make CFLAGS="-W -Wall -ansi -pedantic -O2 -g -Wno-unused-but-set-variable"
+	@cd $(DIR) && make CFLAGS="-W -Wall -ansi -pedantic -O2 -g -Wno-unused-but-set-variable $(WITH_PIE)"
 
 $(DIR)/codeform-s: $(DIR)/codeform
 	@cp $(DIR)/codeform $(DIR)/codeform-s
