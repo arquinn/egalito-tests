@@ -14,7 +14,7 @@ $(BUILDDIR)$(TARGET): $(SOURCES)
 	@ln -sf $@ $(TARGET)
 $(BUILDDIR)$(TARGET)-static: $(SOURCES)
 	@mkdir -p $(BUILDDIR)
-	$(SHORT_CC) $(CFLAGS) $(WITH_PIE) $(STATIC_LINKING) -o $@ $^
+	$(SHORT_CC) $(CFLAGS) $(STATIC_LINKING) -o $@ $^
 	@ln -sf $@ $(TARGET)-static
 $(BUILDDIR)$(TARGET)-s: $(SOURCES)
 	@mkdir -p $(BUILDDIR)
