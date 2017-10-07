@@ -7,8 +7,10 @@ CONFIG_DIRS = $(wildcard x86_64*) $(wildcard aarch64*) $(wildcard arm*)
 all:  # default target
 
 all clean:
-	$(foreach DIR, $(TARGET_DIRS), \
-		$(MAKE) -C $(DIR) PLATFORM=$(PLATFORM) --no-print-directory $@;)
+	@echo '>>>' MAKE -C 'target/*' $@
+	@$(foreach DIR, $(TARGET_DIRS), \
+		$(MAKE) -C $(DIR) PLATFORM=$(PLATFORM) --silent --no-print-directory $@;)
+	@echo '<<<' MAKE -C 'target/*' $@
 
 realclean:
 	$(foreach CONFIG, $(CONFIG_DIRS), rm -f $(CONFIG)/build/*;)
