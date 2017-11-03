@@ -14,3 +14,9 @@ jump table in [__fpathconf] has 21 entries
 jump table in [__sysconf] has 247 entries
 jump table in [peek_token] has 87 entries
 jump table in [parse_expression] has 36 entries
+#
+# hand crafted jumptables
+#
+jump table in [printf_positional] has 30 entries
+jump table in [vfprintf] has 30 entries
+jump table in [vfwprintf] has 30 entries
