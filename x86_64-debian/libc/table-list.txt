@@ -60,3 +60,8 @@
 [__sysconf] has 247 entries
 [_wordcopy_bwd_aligned] has 8 entries
 [_wordcopy_fwd_aligned] has 8 entries
+#
+# hand crafted jumptables
+#
+jump table in [vfprintf] has 30 entries
+jump table in [vfwprintf] has 30 entries
