@@ -15,5 +15,6 @@ int main(int argc, char **argv, char **envp) {
     for(char **env = envp; *env; env ++) {
         puts(*env);
     }
+    puts("done");
     return 0;
 }
