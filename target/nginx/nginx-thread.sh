@@ -1,6 +1,7 @@
 #!/bin/bash
 
-filename=$1
+filename=${1:-index.html}
+source wrkparam.sh
 
 command -v wrk > /dev/null 2>&1 || { echo >&2 "needs wrk -- skipping"; exit 0; }
 
@@ -21,7 +22,7 @@ while [ ! -f $pidfile ]; do
 done
 #cat $pidfile
 
-wrk -c10 -d30s -t4 http://localhost:8000/$filename > tmp/nginx-thread-wrk.out
+wrk $wrkparam http://localhost:8000/$filename > tmp/nginx-thread-wrk.out
 
 kill -QUIT $( cat $pidfile )
 
@@ -34,4 +35,4 @@ while [ -f $pidfile ]; do
   fi
 done
 
-cat tmp/nginx-thread-wrk.out
+#cat tmp/nginx-thread-wrk.out
