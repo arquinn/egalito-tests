@@ -16,5 +16,5 @@ realclean:
 	$(foreach CONFIG, $(CONFIG_DIRS), rm -f $(CONFIG)/build/*;)
 
 symlinks:
-	@ln -sf $(PLATFORM) platform
-	@ln -sf $(PLATFORM)/build build
+	@ln -sfn $(PLATFORM) platform
+	@ln -sfn $(PLATFORM)/build build
