@@ -1390,7 +1390,8 @@ ngx_http_parse_complex_uri(ngx_http_request_t *r, ngx_uint_t merge_slashes)
                 goto done;
             case '+':
                 r->plus_in_uri = 1;
-                __attribute__((fallthrough));
+                //-fallthrough
+                //__attribute__((fallthrough));
             default:
                 state = sw_usual;
                 *u++ = ch;
@@ -1432,7 +1433,8 @@ ngx_http_parse_complex_uri(ngx_http_request_t *r, ngx_uint_t merge_slashes)
                 goto done;
             case '+':
                 r->plus_in_uri = 1;
-                __attribute__((fallthrough));
+                //-fallthrough
+                //__attribute__((fallthrough));
             default:
                 state = sw_usual;
                 *u++ = ch;
@@ -1480,7 +1482,8 @@ ngx_http_parse_complex_uri(ngx_http_request_t *r, ngx_uint_t merge_slashes)
                 goto done;
             case '+':
                 r->plus_in_uri = 1;
-                __attribute__((fallthrough));
+                //-fallthrough
+                //__attribute__((fallthrough));
             default:
                 state = sw_usual;
                 *u++ = ch;

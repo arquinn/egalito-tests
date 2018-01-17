@@ -405,7 +405,8 @@ ngx_signal_handler(int signo)
                 break;
             }
             ngx_debug_quit = 1;
-            __attribute__((fallthrough));
+            //-fallthrough
+            //__attribute__((fallthrough));
         case ngx_signal_value(NGX_SHUTDOWN_SIGNAL):
             ngx_quit = 1;
             action = ", shutting down";
