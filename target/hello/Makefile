@@ -29,4 +29,5 @@ $(BUILDDIR)$(TARGET)-q: $(SOURCES)
 clean:
 	-@rm -f $(BUILDDIR)$(TARGET) $(TARGET) \
 		$(BUILDDIR)$(TARGET)-static $(TARGET)-static \
-		$(BUILDDIR)$(TARGET)-s $(TARGET)-s
+		$(BUILDDIR)$(TARGET)-s $(TARGET)-s \
+		$(BUILDDIR)$(TARGET)-q $(TARGET)-q
