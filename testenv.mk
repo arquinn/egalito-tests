@@ -9,6 +9,7 @@ LINK    = $(CXX)
 AR      = ar
 
 CFLAGS          = -O2 -std=gnu99
+CXXFLAGS        = -O2
 ASFLAGS         = -fPIC
 
 WITH_PIE        = -fPIE -pie
