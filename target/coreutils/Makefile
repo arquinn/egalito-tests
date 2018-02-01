@@ -1,30 +1,23 @@
 # Makefile for coreutils test case
-include ../../testenv.mk
-
-PACKAGE = coreutils-8.29
-DIR = install
+export PACKAGE = coreutils-8.29
+export DIR = install
 
 .PHONY: all
-all: $(DIR)
+all: $(DIR)/bin/cat-q
 
-$(DIR): build/Makefile;
-	@$(MAKE) -C build install > /dev/null
+$(DIR)/bin/cat-q: $(DIR)/bin/cat
+	@mv $(DIR) $(DIR).b
+	@rm build/Makefile
+	@$(MAKE) -f sub.mk LDFLAGS='-Wl,-q'
+	$(foreach f,$(notdir $(wildcard $(DIR)/bin/*)), \
+		mv $(DIR)/bin/$f $(DIR).b/bin/$f-q;)
+	@touch $(DIR).b -r $(DIR)
+	@rm -fr $(DIR)
+	@mv $(DIR).b $(DIR)
 
-build/Makefile: $(PACKAGE)
-	@mkdir -p build && \
-	cd build && \
-	../$(PACKAGE)/configure --prefix=$(abspath ./$(DIR)) > /dev/null 2>&1
+$(DIR)/bin/cat:
+	@$(MAKE) -f sub.mk all
 
-$(PACKAGE): $(PACKAGE).tar.xz
-	@tar axpf $<
+%clean:
+	$(MAKE) -f sub.mk $@
 
-$(PACKAGE).tar.xz:
-	@curl -O https://ftp.gnu.org/gnu/coreutils/$(PACKAGE).tar.xz > /dev/null 2>&1
-
-.PHONY: clean
-clean:
-	-@rm -rf $(DIR)
-	$(if $(wildcard $(PACKAGE)/Makefile),$(MAKE) -C $(PACKAGE) clean)
-
-realclean:
-	-@rm -rf $(DIR) $(PACKAGE) $(PACKAGE).tar.xz build
