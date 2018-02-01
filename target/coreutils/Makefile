@@ -3,21 +3,21 @@ export PACKAGE = coreutils-8.29
 export DIR = install
 
 .PHONY: all
-all: $(DIR)/bin/cat-q
+all: $(DIR)
 
-$(DIR)/bin/cat-q: $(DIR)/bin/cat
-	@mv $(DIR) $(DIR).b
-	@rm build/Makefile
-	@$(MAKE) -f sub.mk LDFLAGS='-Wl,-q'
-	$(foreach f,$(notdir $(wildcard $(DIR)/bin/*)), \
-		mv $(DIR)/bin/$f $(DIR).b/bin/$f-q;)
-	@touch $(DIR).b -r $(DIR)
-	@rm -fr $(DIR)
-	@mv $(DIR).b $(DIR)
+$(DIR):
+	$(MAKE) -f sub.mk all
+	mv $(DIR) $(DIR).b
+	$(MAKE) -f sub.mk clean
+	$(MAKE) -f sub.mk all LDFLAGS='-Wl,-q'
+	$(MAKE) rename
+	mv $(DIR).b/bin/* $(DIR)/bin
+	rm -fr $(DIR).b
 
-$(DIR)/bin/cat:
-	@$(MAKE) -f sub.mk all
+rename:
+	$(foreach f,$(wildcard $(DIR)/bin/*), mv $f $f-q;)
 
-%clean:
+.PHONY: clean realclean
+clean realclean:
 	$(MAKE) -f sub.mk $@
 

@@ -12,7 +12,7 @@ $(DIR): build/Makefile;
 build/Makefile: $(PACKAGE)
 	@mkdir -p build && \
 	cd build && \
-	env LDFLAGS=$(LDFLAGS) ../$(PACKAGE)/configure --prefix=$(abspath ./$(DIR)) > /dev/null 2>&1
+	env CC=$(CC) ../$(PACKAGE)/configure --prefix=$(abspath ./$(DIR)) > /dev/null 2>&1
 
 $(PACKAGE): $(PACKAGE).tar.xz
 	@tar axf $<
@@ -23,8 +23,7 @@ $(PACKAGE).tar.xz:
 
 .PHONY: clean
 clean:
-	-@rm -rf $(DIR)
-	$(if $(wildcard $(PACKAGE)/Makefile),$(MAKE) -C $(PACKAGE) clean)
+	$(if $(wildcard build/Makefile),$(MAKE) -C build clean)
 
 realclean:
 	-@rm -rf $(DIR) $(PACKAGE) $(PACKAGE).tar.xz build
