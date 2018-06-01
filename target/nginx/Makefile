@@ -8,10 +8,11 @@ all: $(DIR)/sbin/nginx
 
 $(DIR)/sbin/nginx:
 	@cd nginx-1.11.3; \
-	./configure --prefix=$(abspath ./$(DIR)) --with-cc-opt='-O2 -fPIC' --with-ld-opt='-pie' --with-threads > /dev/null 2>&1; \
+	./configure --prefix=$(abspath ./$(DIR)) --with-cc-opt='-O2 -fPIC' --with-ld-opt='-pie' --with-threads > config.log 2>&1 || \
+		tail config.log;\
 	$(MAKE); \
 	$(MAKE) install; \
-	cd -; \
+	cd - > /dev/null; \
 	rm -rf $(DIR)/conf; \
 	dd if=/dev/zero of=$(DIR)/html/100k bs=1024 count=100 > /dev/null 2>&1; \
 	dd if=/dev/zero of=$(DIR)/html/1024k bs=1024 count=1024 > /dev/null 2>&1
