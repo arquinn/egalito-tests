@@ -19,7 +19,7 @@ $(PACKAGE): $(PACKAGE).tar.xz
 	@touch $@
 
 $(PACKAGE).tar.xz:
-	@curl -O https://ftp.gnu.org/gnu/coreutils/$(PACKAGE).tar.xz > /dev/null 2>&1
+	@wget https://ftp.gnu.org/gnu/coreutils/$(PACKAGE).tar.xz > /dev/null 2>&1
 
 .PHONY: clean
 clean:

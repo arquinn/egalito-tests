@@ -2,8 +2,10 @@
 export PACKAGE = coreutils-8.29
 export DIR = install
 
-.PHONY: all
-all: $(DIR)
+.PHONY: all full
+all:
+	$(info Skipping coreutils test, use 'make full' in test/binary/target/coreutils to build)
+full: $(DIR)
 
 $(DIR):
 	$(MAKE) -f sub.mk all

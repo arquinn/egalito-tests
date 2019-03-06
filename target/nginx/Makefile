@@ -3,8 +3,10 @@ include ../../testenv.mk
 
 DIR = nginx
 
-.PHONY: all
-all: $(DIR)/sbin/nginx
+.PHONY: all full
+all:
+	$(info Skipping nginx test, use 'make full' in test/binary/target/nginx to build)
+full: $(DIR)/sbin/nginx
 
 $(DIR)/sbin/nginx:
 	@cd nginx-1.11.3; \
