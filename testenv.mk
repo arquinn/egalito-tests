@@ -42,6 +42,8 @@ else ifeq (x86_64,$(P_ARCH))
     CFLAGS += -DARCH_X86_64
 else ifeq (arm,$(P_ARCH))
     CFLAGS += -DARCH_ARM
+else ifeq (i686,$(P_ARCH))
+    CFLAGS += -DARCH_I686
 else
 $(error Unsupported platform, we only handle arm, aarch64, and x86_64)
 endif
